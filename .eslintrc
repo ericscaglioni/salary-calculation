@@ -1,3 +1,22 @@
 {
-  "extends": ["next", "next/core-web-vitals"]
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "next",
+    "next/core-web-vitals"
+  ],
+  "rules": {
+    "strict": 0,
+    "no-new": 0,
+    "comma-dangle": ["warn", "always-multiline"],
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "quotes": [2, "single"],
+    "eol-last": "error"
+  }
 }
