@@ -5,12 +5,6 @@ import { getTotalWorkedHours } from '../../../src/api/lib'
 
 chai.use(sinonChai)
 
-const emptyWorkedObj = () => ({
-  hours: 0,
-  minutes: 0,
-  seconds: 0,
-})
-
 const fakeWorkedObj = () => ({
   hours: 188,
   minutes: 34,
