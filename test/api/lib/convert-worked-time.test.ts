@@ -1,21 +1,15 @@
-import { expect } from 'chai'
+import { expect, assert } from 'chai'
 import { convertWorkedTime } from '../../../src/api/lib'
 
-const initialWorkedTime = {
-  hours: 0,
-  minutes: 0,
-  seconds: 0,
-}
-
 describe('/api/lib/convert-worked-time', () => {
-  it('returns zeroed worked time when an invalid argument is provided', () => {
+  it('throws when an invalid string is provided', () => {
     const workedTime = 'invalid_worked_time'
-    expect(convertWorkedTime(workedTime)).deep.eq(initialWorkedTime)
+    assert.throw(() => convertWorkedTime(workedTime), 'Invalid worked time')
   })
 
-  it('returns zeroed worked time when time provided is invalid', () => {
+  it('throws when time provided is invalid', () => {
     const workedTime = '25:65:62'
-    expect(convertWorkedTime(workedTime)).deep.eq(initialWorkedTime)
+    assert.throw(() => convertWorkedTime(workedTime), 'Invalid worked time')
   })
 
   it('returns object on success', () => {
