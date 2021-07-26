@@ -18,7 +18,7 @@ describe('/api/lib/get-total-worked-hours', () => {
     const convertWorkedTimeStub = sinon.stub().throws(new Error('any_error'))
     assert.throws(() => getTotalWorkedHours(validWorkedTime, {
       convertWorkedTime: convertWorkedTimeStub,
-      timeToDecimal: sinon.stub(),
+      totalDecimalHours: sinon.stub(),
     }), 'any_error')
   })
 
@@ -26,31 +26,29 @@ describe('/api/lib/get-total-worked-hours', () => {
     const convertWorkedTimeStub = sinon.stub().returns(fakeWorkedObj())
     getTotalWorkedHours(validWorkedTime, {
       convertWorkedTime: convertWorkedTimeStub,
-      timeToDecimal: sinon.stub(),
+      totalDecimalHours: sinon.stub(),
     })
     expect(convertWorkedTimeStub).to.have.been.calledWith(validWorkedTime)
   })
 
-  it('calls timeToDecimal with correct data', () => {
+  it('calls totalDecimalHours with correct data', () => {
     const convertWorkedTimeSpy = sinon.stub().returns(fakeWorkedObj())
-    const timeToDecimalSpy = sinon.stub()
+    const totalDecimalHoursSpy = sinon.stub()
     getTotalWorkedHours(validWorkedTime, {
       convertWorkedTime: convertWorkedTimeSpy,
-      timeToDecimal: timeToDecimalSpy,
+      totalDecimalHours: totalDecimalHoursSpy,
     })
-    expect(timeToDecimalSpy).to.have.been.calledWith(0)
-    expect(timeToDecimalSpy).to.have.been.calledWith(34)
+    expect(totalDecimalHoursSpy).to.have.been.calledWith({ hours: 188, minutes: 34, seconds: 0 })
   })
 
   it('returns total of worked hour', () => {
     const convertWorkedTimeSpy = sinon.stub().returns(fakeWorkedObj())
-    const timeToDecimalSpy = sinon.stub()
-      .onCall(0).returns(0)
-      .onCall(1).returns(0.5667)
+    const totalDecimalHoursSpy = sinon.stub()
+      .returns(10)
     const workedHours = getTotalWorkedHours(validWorkedTime, {
       convertWorkedTime: convertWorkedTimeSpy,
-      timeToDecimal: timeToDecimalSpy,
+      totalDecimalHours: totalDecimalHoursSpy,
     })
-    expect(workedHours).to.eq(188.5667)
+    expect(workedHours).to.eq(10)
   })
 })

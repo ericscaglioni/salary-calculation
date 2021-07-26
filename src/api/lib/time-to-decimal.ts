@@ -1,1 +1,6 @@
-export const timeToDecimal = (time: number): number => Number((time / 60).toFixed(4))
+import { WorkedTime } from '../types';
+
+export const totalDecimalHours = ({ hours, minutes, seconds }: WorkedTime): number => {
+  const totalHours = hours + (minutes / 60) + (seconds / 3600)
+  return Number(totalHours.toFixed(4));
+}

@@ -2,16 +2,13 @@ import { WorkedTime } from '../types'
 
 type Params = {
   convertWorkedTime: (s: string) => WorkedTime
-  timeToDecimal: (n: number) => number
+  totalDecimalHours: (wt: WorkedTime) => number
 }
 
 export const getTotalWorkedHours = (
   strWorkedTime: string,
-  { convertWorkedTime, timeToDecimal }: Params,
+  { convertWorkedTime, totalDecimalHours }: Params,
 ): number => {
-  const { hours, minutes, seconds } = convertWorkedTime(strWorkedTime)
-  const decimalSeconds = timeToDecimal(seconds)
-  const decimalMinutes = timeToDecimal(minutes) + decimalSeconds
-  const totalWorkedHours = hours + decimalMinutes
-  return totalWorkedHours
+  const workedTime = convertWorkedTime(strWorkedTime)
+  return totalDecimalHours(workedTime)
 }
