@@ -1,1 +1,1 @@
-export { default } from '../../api/controllers/worked-time-controller'
+export { default } from '../../api/controllers/calculate-salary-controller'
